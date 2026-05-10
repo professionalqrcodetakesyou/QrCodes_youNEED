@@ -1,1156 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Professional QR Codes That Actually Do Something</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --bg: #050816;
-      --bg-soft: #0b1020;
-      --card: #020617;
-      --accent: #6366f1;
-      --accent-soft: rgba(99, 102, 241, 0.12);
-      --accent-2: #22c55e;
-      --text: #f9fafb;
-      --muted: #9ca3af;
-      --border: #1f2937;
-      --danger: #f97373;
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
-      --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.45);
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font-main);
-      background: radial-gradient(circle at top, #111827 0, #020617 45%, #000 100%);
-      color: var(--text);
-      min-height: 100vh;
-      scroll-behavior: smooth;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .page {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 24px 16px 64px;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: radial-gradient(circle at top left, #6366f1, #22c55e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      box-shadow: var(--shadow-glow);
-    }
-
-    .logo-text {
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    nav {
-      display: flex;
-      gap: 18px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    nav a {
-      padding: 4px 0;
-      position: relative;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #6366f1, #22c55e);
-      transition: width 0.15s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* HERO */
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 32px;
-      align-items: center;
-      margin-top: 24px;
-      margin-bottom: 56px;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      margin-bottom: 16px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent-2);
-      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
-    }
-
-    h1 {
-      font-size: clamp(32px, 4vw, 40px);
-      line-height: 1.1;
-      margin-bottom: 12px;
-    }
-
-    h1 span {
-      background: linear-gradient(120deg, #6366f1, #a855f7, #22c55e);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .subtitle {
-      font-size: 15px;
-      color: var(--muted);
-      max-width: 460px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .stats-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .stat-pill {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--muted);
-    }
-
-    .stat-pill strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .stat-pill span.icon {
-      font-size: 15px;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .btn-primary {
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 12px 20px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: var(--shadow-glow);
-      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 50px rgba(99, 102, 241, 0.7);
-      opacity: 0.96;
-    }
-
-    .btn-ghost {
-      border-radius: 999px;
-      padding: 11px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: rgba(15, 23, 42, 0.8);
-      color: var(--muted);
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
-    }
-
-    .btn-ghost:hover {
-      border-color: rgba(148, 163, 184, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text);
-    }
-
-    .trust-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      align-items: center;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .trust-avatars {
-      display: flex;
-      align-items: center;
-    }
-
-    .avatar {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      border: 2px solid #020617;
-      background: linear-gradient(135deg, #6366f1, #22c55e);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: white;
-      margin-left: -8px;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
-    }
-
-    .avatar:first-child {
-      margin-left: 0;
-    }
-
-    .trust-label {
-      margin-left: 4px;
-    }
-
-    /* HERO PREVIEW CARD */
-
-    .preview-wrap {
-      display: flex;
-      justify-content: center;
-    }
-
-    .preview-card {
-      width: 100%;
-      max-width: 420px;
-      background: radial-gradient(circle at top left, #111827 0, #020617 55%);
-      border-radius: 26px;
-      padding: 18px 18px 20px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .preview-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at top, rgba(99, 102, 241, 0.18), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .preview-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .preview-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .preview-title {
-      font-size: 13px;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .preview-title-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(99, 102, 241, 0.9);
-    }
-
-    .preview-pill {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .preview-main {
-      display: grid;
-      grid-template-columns: 120px minmax(0, 1fr);
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-
-    @media (max-width: 480px) {
-      .preview-main {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .qr-box {
-      border-radius: var(--radius-lg);
-      padding: 10px;
-      background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .qr-box::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(
-          45deg,
-          rgba(99, 102, 241, 0.18) 0,
-          transparent 40%,
-          transparent 60%,
-          rgba(34, 197, 94, 0.18) 100%
-        );
-      mix-blend-mode: screen;
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .qr-fake {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 10px;
-      background-image:
-        linear-gradient(90deg, #020617 0, #020617 10%, #111827 10%, #111827 20%, #020617 20%, #020617 30%, #111827 30%, #111827 40%, #020617 40%, #020617 50%, #111827 50%, #111827 60%, #020617 60%, #020617 70%, #111827 70%, #111827 80%, #020617 80%, #020617 90%, #111827 90%, #111827 100%),
-        linear-gradient(0deg, #020617 0, #020617 10%, #111827 10%, #111827 20%, #020617 20%, #020617 30%, #111827 30%, #111827 40%, #020617 40%, #020617 50%, #111827 50%, #111827 60%, #020617 60%, #020617 70%, #111827 70%, #111827 80%, #020617 80%, #020617 90%, #111827 90%, #111827 100%);
-      background-size: 10px 10px;
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
-    }
-
-    .preview-info {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .preview-info-title {
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .preview-info-sub {
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .preview-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4px;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      color: var(--muted);
-    }
-
-    .analytics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-
-    .metric-card {
-      border-radius: var(--radius-md);
-      padding: 8px 9px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-    }
-
-    .metric-label {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .metric-trend {
-      font-size: 11px;
-      margin-top: 2px;
-    }
-
-    .metric-trend.up {
-      color: var(--accent-2);
-    }
-
-    .metric-trend.down {
-      color: var(--danger);
-    }
-
-    .timeline {
-      border-radius: var(--radius-md);
-      padding: 9px 10px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .timeline-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .timeline-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .timeline-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .timeline-pill {
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .preview-footer {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .preview-footer span strong {
-      color: var(--text);
-    }
-
-    .preview-footer-cta {
-      font-size: 11px;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(99, 102, 241, 0.7);
-      color: #c7d2fe;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* SECTIONS */
-
-    section {
-      margin-bottom: 56px;
-    }
-
-    .section-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .section-title {
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
-
-    .section-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    @media (max-width: 900px) {
-      .section-grid-3 {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .feature-card {
-      background: var(--bg-soft);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 16px 16px 18px;
-      font-size: 14px;
-    }
-
-    .feature-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-
-    .feature-title {
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .feature-text {
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* HOW IT WORKS */
-
-    .how-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    @media (max-width: 900px) {
-      .how-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .step {
-      background: var(--bg-soft);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 16px 16px 18px;
-      font-size: 14px;
-    }
-
-    .step-number {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      margin-bottom: 8px;
-      color: #c7d2fe;
-    }
-
-    .step-title {
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .step-text {
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    /* PRICING */
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    @media (max-width: 900px) {
-      .pricing-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .plan {
-      background: var(--bg-soft);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 18px 18px 20px;
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .plan.highlight {
-      border-color: var(--accent);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-    }
-
-    .plan-badge {
-      position: absolute;
-      top: 12px;
-      right: 14px;
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(99, 102, 241, 0.7);
-      color: #c7d2fe;
-    }
-
-    .plan-name {
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .plan-price {
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .plan-price span {
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .plan-list {
-      list-style: none;
-      padding-left: 0;
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .plan-list li {
-      margin-bottom: 4px;
-    }
-
-    .plan-cta {
-      margin-top: 8px;
-      font-size: 13px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(15, 23, 42, 0.9);
-      text-align: center;
-      cursor: pointer;
-      transition: border-color 0.12s ease, background 0.12s ease;
-    }
-
-    .plan.highlight .plan-cta {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
-
-    .plan-cta:hover {
-      border-color: rgba(148, 163, 184, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-    }
-
-    /* CONTACT */
-
-    .contact-card {
-      background: var(--bg-soft);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 18px 18px 20px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 20px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 900px) {
-      .contact-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .contact-text {
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      font-size: 12px;
-    }
-
-    .field label {
-      color: var(--muted);
-    }
-
-    .field input,
-    .field textarea {
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #020617;
-      padding: 8px 10px;
-      color: var(--text);
-      font-family: var(--font-main);
-      font-size: 13px;
-      outline: none;
-    }
-
-    .field textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .field input:focus,
-    .field textarea:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.5);
-    }
-
-    .contact-note {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    footer {
-      margin-top: 40px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      font-size: 11px;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    footer a {
-      color: var(--muted);
-      text-decoration: underline;
-      text-decoration-style: dotted;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Professional QR Codes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #0d1117;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: auto;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  h1 span {
+    color: #58a6ff;
+  }
+
+  h2 {
+    margin-top: 40px;
+    font-size: 24px;
+  }
+
+  p {
+    color: #c9d1d9;
+    line-height: 1.6;
+  }
+
+  .card {
+    background: #161b22;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #30363d;
+    margin-top: 20px;
+  }
+
+  .qr {
+    width: 150px;
+    height: 150px;
+    background: repeating-linear-gradient(45deg, #000 0 10px, #222 10px 20px);
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .metric {
+    background: #0d1117;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 18px;
+    background: #238636;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .field {
+    margin-bottom: 12px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  textarea {
+    height: 100px;
+    resize: vertical;
+  }
+</style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="logo">
-        <div class="logo-mark">QR</div>
-        <div class="logo-text">Professional QR Codes</div>
-      </div>
-      <nav>
-        <a href="#how">How it works</a>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
 
-    <!-- HERO -->
-    <section class="hero">
-      <div>
-        <div class="badge">
-          <span class="badge-dot"></span>
-          Live QR analytics for real businesses
-        </div>
+<div class="container">
 
-        <h1>
-          Turn <span>simple QR codes</span> into leads, data, and real customers.
-        </h1>
+  <!-- HERO -->
+  <h1>Professional <span>QR Codes</span></h1>
+  <p>I make clean, trackable QR codes that show you who scanned and when. Simple, fast, and perfect for businesses.</p>
 
-        <p class="subtitle">
-          I create custom, trackable QR codes with mini‑pages and analytics—so you can see
-          who scanned, when they scanned, and what they cared about.
-        </p>
+  <a class="btn" href="#contact">Get Your Free Demo →</a>
 
-        <div class="stats-row">
-          <div class="stat-pill">
-            <span class="icon">📈</span>
-            <span><strong>3× more scans</strong> vs basic QR codes</span>
-          </div>
-          <div class="stat-pill">
-            <span class="icon">🎯</span>
-            <span><strong>See every scan</strong> by time & device</span>
-          </div>
-        </div>
-
-        <div class="cta-row">
-          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            Get a free demo QR code
-            <span>→</span>
-          </button>
-          <button class="btn-ghost" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">
-            See how the tracking works
-          </button>
-        </div>
-
-        <div class="trust-row">
-          <div class="trust-avatars">
-            <div class="avatar">D</div>
-            <div class="avatar">R</div>
-            <div class="avatar">S</div>
-          </div>
-          <div class="trust-label">
-            Used by <strong>dealers, realtors, and small brands</strong> to track interest.
-          </div>
-        </div>
-      </div>
-
-      <div class="preview-wrap">
-        <div class="preview-card">
-          <div class="preview-inner">
-            <div class="preview-header">
-              <div class="preview-title">
-                <span class="preview-title-dot"></span>
-                Live QR preview
-              </div>
-              <div class="preview-pill">
-                Demo · Car Listing
-              </div>
-            </div>
-
-            <div class="preview-main">
-              <div class="qr-box">
-                <div class="qr-fake"></div>
-              </div>
-              <div class="preview-info">
-                <div class="preview-info-title">
-                  2023 Sportline • Window QR
-                </div>
-                <div class="preview-info-sub">
-                  When someone scans this code on the car, you see the scan in real time.
-                </div>
-                <div class="preview-tags">
-                  <span class="tag">Scans by time</span>
-                  <span class="tag">Device type</span>
-                  <span class="tag">Top listings</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="analytics-grid">
-              <div class="metric-card">
-                <div class="metric-label">Total scans</div>
-                <div class="metric-value">184</div>
-                <div class="metric-trend up">+62% this week</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">Unique visitors</div>
-                <div class="metric-value">129</div>
-                <div class="metric-trend up">+41% new</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-label">Top device</div>
-                <div class="metric-value">iPhone</div>
-                <div class="metric-trend">68% of scans</div>
-              </div>
-            </div>
-
-            <div class="timeline">
-              <div class="timeline-row">
-                <div class="timeline-label">
-                  <span class="timeline-dot"></span>
-                  Today · 14 scans
-                </div>
-                <span class="timeline-pill">Most at 5–7 PM</span>
-              </div>
-              <div class="timeline-row">
-                <div class="timeline-label">
-                  <span class="timeline-dot"></span>
-                  Top location
-                </div>
-                <span class="timeline-pill">Dealership lot</span>
-              </div>
-            </div>
-
-            <div class="preview-footer">
-              <span>
-                This is what <strong>your dashboard</strong> can look like.
-              </span>
-              <span class="preview-footer-cta">
-                Try a live demo
-                <span>→</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section id="how">
-      <div class="section-label">How it works</div>
-      <div class="section-title">From scan to insight in three simple steps.</div>
-      <div class="how-grid">
-        <div class="step">
-          <div class="step-number">1</div>
-          <div class="step-title">You tell me what you need</div>
-          <div class="step-text">
-            Car stickers, house flyers, posters, menus—anything. You send the details and where you want people to land.
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <div class="step-title">I build your QR + mini‑page</div>
-          <div class="step-text">
-            I create a custom QR code and a clean mini‑page that works on every phone, no apps needed.
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <div class="step-title">You watch the scans roll in</div>
-          <div class="step-text">
-            You get a simple dashboard showing scans, devices, and what people tapped—so you know what’s working.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section id="features">
-      <div class="section-label">Features</div>
-      <div class="section-title">Everything you wish free QR codes could do.</div>
-      <div class="section-grid-3">
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <div class="feature-title">Real analytics</div>
-          <div class="feature-text">
-            See total scans, unique visitors, top devices, and peak times so you can make smarter decisions.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📍</div>
-          <div class="feature-title">Location‑aware</div>
-          <div class="feature-text">
-            Know which cars, houses, or posters get the most attention—no guessing, just data.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🧩</div>
-          <div class="feature-title">Custom mini‑pages</div>
-          <div class="feature-text">
-            Each QR can have its own mini‑page with photos, buttons, and links tailored to that item.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-title">Fast to scan</div>
-          <div class="feature-text">
-            Optimized for mobile so pages load quickly—even on slow connections in parking lots or on the street.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <div class="feature-title">Lead‑focused</div>
-          <div class="feature-text">
-            Add buttons for “Call now”, “Book a tour”, or “Get more info” so scans turn into real conversations.
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🛠️</div>
-          <div class="feature-title">Done‑for‑you setup</div>
-          <div class="feature-text">
-            You don’t have to touch any tech. I set everything up and send you ready‑to‑print QR codes.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRICING -->
-    <section id="pricing">
-      <div class="section-label">Pricing</div>
-      <div class="section-title">Simple plans that grow with you.</div>
-      <div class="pricing-grid">
-        <div class="plan">
-          <div class="plan-name">Starter</div>
-          <div class="plan-price">$29 <span>/ one‑time</span></div>
-          <ul class="plan-list">
-            <li>Up to 5 custom QR codes</li>
-            <li>Basic scan analytics</li>
-            <li>One mini‑page template</li>
-            <li>Email support</li>
-          </ul>
-          <div class="plan-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            Start with Starter →
-          </div>
-        </div>
-
-        <div class="plan highlight">
-          <div class="plan-badge">Most popular</div>
-          <div class="plan-name">Pro</div>
-          <div class="plan-price">$79 <span>/ one‑time</span></div>
-          <ul class="plan-list">
-            <li>Up to 20 custom QR codes</li>
-            <li>Full analytics dashboard</li>
-            <li>Custom mini‑pages per QR</li>
-            <li>Priority support</li>
-          </ul>
-          <div class="plan-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            Go Pro →
-          </div>
-        </div>
-
-        <div class="plan">
-          <div class="plan-name">Business</div>
-          <div class="plan-price">Custom <span>/ per month</span></div>
-          <ul class="plan-list">
-            <li>Unlimited QR codes</li>
-            <li>Team access & reports</li>
-            <li>Custom integrations</li>
-            <li>Ongoing optimization</li>
-          </ul>
-          <div class="plan-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-            Talk about Business →
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="section-label">Contact</div>
-      <div class="section-title">Tell me what you want your QR codes to do.</div>
-      <div class="contact-card">
-        <div>
-          <p class="contact-text">
-            Whether you’re a dealer, realtor, or small business, I can set up QR codes that don’t just
-            send people to a random page—they show you what’s working.
-          </p>
-          <p class="contact-text" style="margin-top:10px;">
-            Fill this out with what you’re thinking, and I’ll reply with a simple plan and a free demo QR
-            you can test on your own phone.
-          </p>
-          <p class="contact-note" style="margin-top:10px;">
-            You can also reach me directly at: <strong>youremail@example.com</strong> (replace this in the code).
-          </p>
-        </div>
-        <form class="contact-form">
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" type="text" placeholder="Your name" />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="you@example.com" />
-          </div>
-          <div class="field">
-            <label for="business">Business type</label>
-            <input id="business" type="text" placeholder="Car dealer, realtor, restaurant, etc." />
-          </div>
-          <div class="field">
-            <label for="message">What do you want your QR codes to do?</label>
-            <textarea id="message" placeholder="Example: I want QR codes on each car that show photos, price, and a button to call."></textarea>
-          </div>
-          <button type="button" class="btn-primary">
-            Send message (demo only)
-          </button>
-          <div class="contact-note">
-            This form is visual only right now. You can connect it later with a form service like Formspree or Netlify Forms.
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <footer>
-      <span>© <span id="year"></span> Professional QR Codes. All rights reserved.</span>
-      <span>Built on GitHub Pages with love for clean QR experiences.</span>
-    </footer>
+  <!-- PREVIEW -->
+  <h2>Preview</h2>
+  <div class="card">
+    <div class="qr"></div>
+    <div class="metric">Total scans: <strong>184</strong></div>
+    <div class="metric">Unique visitors: <strong>129</strong></div>
+    <div class="metric">Top device: <strong>iPhone</strong></div>
   </div>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <!-- HOW IT WORKS -->
+  <h2 id="how">How it works</h2>
+  <div class="card">
+    <p>1️⃣ <strong>You tell me what you need</strong><br>
+    Cars, houses, posters, menus — anything. You tell me what the QR should do.</p>
+
+    <p>2️⃣ <strong>I build your QR + mini‑page</strong><br>
+    You get a clean QR code and a simple page that works on every phone.</p>
+
+    <p>3️⃣ <strong>You see the scans</strong><br>
+    You get simple analytics showing scans, devices, and times.</p>
+  </div>
+
+  <!-- CONTACT -->
+  <h2 id="contact">Tell me what you want your QR codes to do.</h2>
+  <div class="card">
+    <p>Fill this out and I’ll send you a free demo QR code you can test on your phone.</p>
+
+    <div class="field">
+      <input type="text" placeholder="Your name">
+    </div>
+
+    <div class="field">
+      <input type="email" placeholder="Your email">
+    </div>
+
+    <div class="field">
+      <input type="text" placeholder="Business type (car dealer, realtor, etc.)">
+    </div>
+
+    <div class="field">
+      <textarea placeholder="What do you want your QR codes to do?"></textarea>
+    </div>
+
+    <a class="btn">Send (demo only)</a>
+  </div>
+
+</div>
+
 </body>
 </html>
