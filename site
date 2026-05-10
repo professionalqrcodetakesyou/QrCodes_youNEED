@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart QR Codes for Your Business</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #0b0f19;
+      color: #fff;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+    }
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+    h1 {
+      font-size: 42px;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    h1 span {
+      color: #6366f1;
+    }
+    p {
+      color: #cbd5e1;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      background: #6366f1;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .preview {
+      background: #111827;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+    }
+    .qr {
+      width: 140px;
+      height: 140px;
+      background: repeating-linear-gradient(
+        45deg,
+        #000 0 10px,
+        #222 10px 20px
+      );
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .metric {
+      background: #1f2937;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .metric strong {
+      color: #22c55e;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div>
+      <h1>Trackable <span>QR Codes</span> That Bring You More Customers</h1>
+      <p>I create custom QR codes with real analytics — see who scanned, when they scanned, and what they looked at.</p>
+      <a class="btn" href="#">Get a Free Demo QR Code →</a>
+    </div>
+
+    <div class="preview">
+      <div class="qr"></div>
+      <div class="metric">Total scans: <strong>184</strong></div>
+      <div class="metric">Unique visitors: <strong>129</strong></div>
+      <div class="metric">Top device: <strong>iPhone</strong></div>
+      <div class="metric">Peak time: <strong>5–7 PM</strong></div>
+    </div>
+  </div>
+
+</body>
+</html>
