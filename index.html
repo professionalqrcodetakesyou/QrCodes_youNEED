@@ -2,152 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Professional QR Codes</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sasic QR Codes</title>
 <style>
-  body {
-    margin: 0;
-    font-family: system-ui, sans-serif;
-    background: #0d1117;
-    color: #fff;
-    padding: 20px;
-  }
-
-  .container {
-    max-width: 800px;
-    margin: auto;
-  }
-
-  h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-  }
-
-  h1 span {
-    color: #58a6ff;
-  }
-
-  h2 {
-    margin-top: 40px;
-    font-size: 24px;
-  }
-
-  p {
-    color: #c9d1d9;
-    line-height: 1.6;
-  }
-
-  .card {
-    background: #161b22;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #30363d;
-    margin-top: 20px;
-  }
-
-  .qr {
-    width: 150px;
-    height: 150px;
-    background: repeating-linear-gradient(45deg, #000 0 10px, #222 10px 20px);
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-
-  .metric {
-    background: #0d1117;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #30363d;
-    margin-bottom: 10px;
-  }
-
-  .btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 18px;
-    background: #238636;
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .field {
-    margin-bottom: 12px;
-  }
-
-  input, textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #30363d;
-    background: #0d1117;
-    color: #fff;
-    font-size: 14px;
-  }
-
-  textarea {
-    height: 100px;
-    resize: vertical;
-  }
+    body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        margin: 0;
+        padding: 0;
+        color: #222;
+        text-align: center;
+    }
+    header {
+        padding: 60px 20px;
+        background: #ffffff;
+    }
+    h1 {
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    p {
+        font-size: 18px;
+        margin-top: 0;
+    }
+    .section {
+        padding: 40px 20px;
+        background: #ffffff;
+        margin: 20px auto;
+        width: 90%;
+        max-width: 700px;
+        border-radius: 10px;
+    }
+    .price-box {
+        background: #eee;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 10px 0;
+        font-size: 18px;
+    }
+    input, textarea {
+        width: 90%;
+        max-width: 500px;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+    .button {
+        display: inline-block;
+        padding: 12px 20px;
+        background: black;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-top: 10px;
+        font-size: 18px;
+    }
 </style>
 </head>
 <body>
 
-<div class="container">
+<header>
+    <h1>Custom QR Codes by Sasic</h1>
+    <p>Fast • Clean • Custom • Worldwide Orders</p>
+</header>
 
-  <!-- HERO -->
-  <h1>Professional <span>QR Codes</span></h1>
-  <p>I make clean, trackable QR codes that show you who scanned and when. Simple, fast, and perfect for businesses.</p>
+<div class="section">
+    <h2>Services & Pricing</h2>
 
-  <a class="btn" href="#contact">Get Your Free Demo →</a>
+    <div class="price-box">$5 — Basic QR Code</div>
+    <div class="price-box">$10 — Custom Color QR</div>
+    <div class="price-box">$15 — QR + Mini Website</div>
+    <div class="price-box">$20 — QR + Tracking + Analytics</div>
+</div>
 
-  <!-- PREVIEW -->
-  <h2>Preview</h2>
-  <div class="card">
-    <div class="qr"></div>
-    <div class="metric">Total scans: <strong>184</strong></div>
-    <div class="metric">Unique visitors: <strong>129</strong></div>
-    <div class="metric">Top device: <strong>iPhone</strong></div>
-  </div>
+<div class="section">
+    <h2>Sample QR Code</h2>
+    <p>This is an example of the style and quality you’ll get.</p>
+    <img src="sample.png" width="220">
+</div>
 
-  <!-- HOW IT WORKS -->
-  <h2 id="how">How it works</h2>
-  <div class="card">
-    <p>1️⃣ <strong>You tell me what you need</strong><br>
-    Cars, houses, posters, menus — anything. You tell me what the QR should do.</p>
+<div class="section">
+    <h2>Order a QR Code</h2>
+    <p>Tell me exactly what you want your QR code to do.</p>
 
-    <p>2️⃣ <strong>I build your QR + mini‑page</strong><br>
-    You get a clean QR code and a simple page that works on every phone.</p>
+    <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name">
+        <input type="email" name="email" placeholder="Your Email">
+        <textarea name="details" rows="5" placeholder="What do you want your QR code to link to? (Website, menu, phone number, landing page, etc.)"></textarea>
+        <br>
+        <button class="button" type="submit">Send Request</button>
+    </form>
 
-    <p>3️⃣ <strong>You see the scans</strong><br>
-    You get simple analytics showing scans, devices, and times.</p>
-  </div>
-
-  <!-- CONTACT -->
-  <h2 id="contact">Tell me what you want your QR codes to do.</h2>
-  <div class="card">
-    <p>Fill this out and I’ll send you a free demo QR code you can test on your phone.</p>
-
-    <div class="field">
-      <input type="text" placeholder="Your name">
-    </div>
-
-    <div class="field">
-      <input type="email" placeholder="Your email">
-    </div>
-
-    <div class="field">
-      <input type="text" placeholder="Business type (car dealer, realtor, etc.)">
-    </div>
-
-    <div class="field">
-      <textarea placeholder="What do you want your QR codes to do?"></textarea>
-    </div>
-
-    <a class="btn">Send (demo only)</a>
-  </div>
-
+    <br>
+    <a class="button" href="https://paypal.me/">PayPal</a>
 </div>
 
 </body>
